@@ -30,7 +30,7 @@ test_script:
       #([xml](Get-Content $testResultsFile)).Save([console]::Out)
       Get-Content $testResultsFile
       Test-Path $testResultsFile
-      (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", $testResultsFile)
+      iex (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", $testResultsFile)
       if ($res.FailedCount -gt 0) {
           # Terminate the script to fail the build
           $Error | Format-List * -Force
